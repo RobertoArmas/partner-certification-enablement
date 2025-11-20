@@ -2,8 +2,7 @@ import type {NextConfig} from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
-    reactCompiler: true,
-    cacheComponents: false,
+    cacheComponents: true,
   },
   logging: {
     fetches: {
