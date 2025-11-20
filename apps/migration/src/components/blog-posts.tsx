@@ -1,8 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import type {BlogPost} from "@/api";
+import {getFeaturedBlogPosts, type BlogPost} from "@/api";
 
+export const FeaturedBlogPosts = async () => {
+  const featuredPosts = await getFeaturedBlogPosts();
+  return (
+        <BlogPosts posts={featuredPosts} />
+  );
+}
 export default function BlogPosts({posts}: {posts: BlogPost[]}) {
   if (posts.length === 0) {
     return (

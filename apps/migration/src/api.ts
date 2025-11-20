@@ -1,6 +1,7 @@
 import {faker} from "@faker-js/faker";
 
 import {delay} from "./utils";
+import { cacheLife } from "next/cache";
 
 export type Category = ReturnType<typeof generateData>["categories"][number];
 
@@ -118,6 +119,8 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  "use cache";
+  cacheLife("blog");
   console.info(`[API] Fetching blog post with slug: ${slug} (250ms delay)`);
 
   await delay(250);
