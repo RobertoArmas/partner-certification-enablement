@@ -2,7 +2,7 @@ import {getBlogPostBySlug, getFeaturedBlogPosts} from "@/api";
 import Author from "@/components/author";
 
 import BlogPosts from "@/components/blog-posts";
-import { cacheTag } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { Suspense } from "react";
 
 export default async function BlogPostPage({
@@ -11,6 +11,7 @@ export default async function BlogPostPage({
   params: Promise<{slug: string}>;
 }) {
   "use cache";
+  cacheLife("blogPost");
   cacheTag(`blog-post-${(await params).slug}`);
   const {slug} = await params;
   const post = await getBlogPostBySlug(slug);

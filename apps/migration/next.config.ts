@@ -9,6 +9,17 @@ const nextConfig: NextConfig = {
       fullUrl: true,
     },
   },
+  cacheLife: {
+    home: {
+      revalidate: 60,
+    },
+    blog: {
+      revalidate: 60,
+    },
+    blogPost: {
+      revalidate: 60,
+    },
+  },
   images: {
     remotePatterns: [
       {
