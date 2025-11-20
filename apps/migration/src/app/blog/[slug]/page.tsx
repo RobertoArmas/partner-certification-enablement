@@ -32,16 +32,15 @@ export default async function BlogPostPage({
 }) {
 
   return (<>
-  
-       <Suspense fallback={<p>Loading...</p>}>
-       <BlogPostComponent params={params} />
-        <section>
+    <BlogPostComponent params={params} />
+    <section>
           <h2 className="mb-8 text-3xl font-bold tracking-tight">
             Featured Posts
           </h2>
+       <Suspense fallback={<p>Loading...</p>}>
           <FeaturedBlogPosts  />
-        </section>
       </Suspense>
+    </section>
   </>
   
   );

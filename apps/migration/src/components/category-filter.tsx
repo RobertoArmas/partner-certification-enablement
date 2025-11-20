@@ -1,10 +1,11 @@
-"use client";
+
 import Link from "next/link";
 import type {Category} from "@/api";
-import { useSearchParams } from "next/navigation";
 
-export default function CategoryFilter({categories, activeCategory}: {categories: Category[], activeCategory?: string}) {
-  const searchParams = useSearchParams();
+export default async function CategoryFilter({categories, searchParams}: {categories: Category[], searchParams: Promise<{category?: string}>}) {
+  "use cache";
+  const {category: activeCategory } = await searchParams;
+
   return (
     <div className="flex flex-wrap gap-2">
       <Link
@@ -19,7 +20,7 @@ export default function CategoryFilter({categories, activeCategory}: {categories
           className="bg-muted text-foreground hover:bg-muted/80 rounded px-3 py-1.5 text-sm font-medium transition-colors"
           href={`/blog?category=${category.slug}`}
         >
-          {category.name} ({category.postCount}) {searchParams.get('category') === category.slug && <span className="text-primary">Active</span>}
+          {category.name} ({category.postCount}) {activeCategory === category?.slug && <span className="text-primary">Active</span>}
         </Link>
       ))}
     </div>
